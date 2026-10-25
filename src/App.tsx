@@ -39,6 +39,8 @@ export const App: React.FC = () => {
 
   // Simulator target state
   const [simulatorTargetAlgo, setSimulatorTargetAlgo] = useState<string>('RSA-2048');
+  // Selected finding for detailed drawer
+  const [selectedFindingForDrawer, setSelectedFindingForDrawer] = useState<CryptoFinding | null>(null);
 
   // Compute Quantum Readiness Score dynamically
   const readinessScore = calculateQuantumReadinessScore(findings);
@@ -101,6 +103,7 @@ export const App: React.FC = () => {
   };
 
   const handleSelectFinding = (finding: CryptoFinding) => {
+    setSelectedFindingForDrawer(finding);
     setCurrentTab('inventory');
   };
 
@@ -143,6 +146,7 @@ export const App: React.FC = () => {
             isDemoData={isDemoData}
             onSimulateAlgorithm={handleSimulateAlgorithm}
             onSelectFinding={handleSelectFinding}
+            initialSelectedFinding={selectedFindingForDrawer}
           />
         )}
 

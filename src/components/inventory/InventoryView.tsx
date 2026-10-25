@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CryptoFinding, RiskLevel } from '../../types/crypto';
 import { RiskBadge } from '../common/RiskBadge';
 import { FindingDetailDrawer } from './FindingDetailDrawer';
@@ -21,6 +21,7 @@ interface InventoryViewProps {
   isDemoData: boolean;
   onSimulateAlgorithm: (algorithm: string) => void;
   onSelectFinding: (finding: CryptoFinding) => void;
+  initialSelectedFinding?: CryptoFinding | null;
 }
 
 export const InventoryView: React.FC<InventoryViewProps> = ({
@@ -28,12 +29,21 @@ export const InventoryView: React.FC<InventoryViewProps> = ({
   isDemoData,
   onSimulateAlgorithm,
   onSelectFinding,
+  initialSelectedFinding,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRisk, setSelectedRisk] = useState<string>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [confirmedOnly, setConfirmedOnly] = useState<boolean>(false);
-  const [activeDrawerFinding, setActiveDrawerFinding] = useState<CryptoFinding | null>(null);
+  const [activeDrawerFinding, setActiveDrawerFinding] = useState<CryptoFinding | null>(
+    initialSelectedFinding || null
+  );
+
+  useEffect(() => {
+    if (initialSelectedFinding) {
+      setActiveDrawerFinding(initialSelectedFinding);
+    }
+  }, [initialSelectedFinding]);
 
   // Filter findings
   const filteredFindings = findings.filter((f) => {
