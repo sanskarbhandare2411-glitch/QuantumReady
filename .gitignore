@@ -30,3 +30,7 @@ dist-test
 .env.*
 .env.local
 
+# Archives
+*.zip
+
+
