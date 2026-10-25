@@ -12,6 +12,7 @@ dist
 dist-ssr
 dist-test
 *.local
+*.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
@@ -26,5 +27,6 @@ dist-test
 
 # Environment
 .env
-.env.production
+.env.*
 .env.local
+
